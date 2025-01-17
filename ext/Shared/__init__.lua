@@ -133,424 +133,6 @@ ResourceManager:RegisterInstanceLoadHandler(Guid('22CFC313-4DD1-49E6-B45F-A8B119
 end)
 
 
--- F18
-Events:Subscribe('Level:RegisterEntityResources', function()
-	ModifyF18AirThermal()
-	print('F18 Air Thermal')
-end)
-function ModifyF18AirThermal()
-  local vehicleBlueprint = VehicleBlueprint(ResourceManager:SearchForDataContainer('Vehicles/F18-F/F18_SpawnInAir'))
-  local vehicleEntity = VehicleEntityData(vehicleBlueprint.object)
-  vehicleEntity:MakeWritable()
-
-
-  local logicReferenceObject = LogicReferenceObjectData()
-  local logicBlueprint = LogicPrefabBlueprint(ResourceManager:SearchForDataContainer('Vehicles/common/LogicalPrefabs/Tank1pFX'))
-  logicReferenceObject.blueprint = logicBlueprint
-  vehicleEntity.components:add(logicReferenceObject)
-
-  local ccd = ResourceManager:FindInstanceByGuid(Guid('99E0A725-E473-4A6C-8421-087F390AABFB'),Guid('B6FFB14E-A0A2-4BCB-9608-AAA54BA0480D'))
-  local gunnerCameraComponent = CameraComponentData(ccd)
-  gunnerCameraComponent:MakeWritable()
-  
-
-  local cameraActiveConnection = PropertyConnection()
-  cameraActiveConnection.source = gunnerCameraComponent
-  cameraActiveConnection.sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
-  cameraActiveConnection.target = logicReferenceObject
-  cameraActiveConnection.targetFieldId = -1110218184
-
-  local flirEnabledConnection = PropertyConnection()
-  flirEnabledConnection.source = gunnerCameraComponent
-  flirEnabledConnection.sourceFieldId = MathUtils:FNVHash('ActiveForLocalPlayer')
-  flirEnabledConnection.target = logicReferenceObject
-  flirEnabledConnection.targetFieldId = MathUtils:FNVHash('CameraActive')
-
-  local pilotCamera = ResourceManager:FindInstanceByGuid(Guid('99E0A725-E473-4A6C-8421-087F390AABFB'),Guid('429CE50C-EE84-44A6-BCB4-4FD749D30C9F'))
-  local pilotCameraData = StaticCameraData(pilotCamera)
-  pilotCameraData:MakeWritable()
-  -- Remove freelook from alternate view
-  pilotCameraData.yawSensitivityZoomed = 0
-  pilotCameraData.pitchSensitivityZoomed = 0
-
-  local pilotAlter = ResourceManager:FindInstanceByGuid(Guid('99E0A725-E473-4A6C-8421-087F390AABFB'),Guid('536B72DD-58EB-474D-B973-B183B2FFC34B'))
-  local pilotAlternateView = AlternateCameraViewData(pilotAlter)
-  pilotAlternateView:MakeWritable()
-  -- Enable toggle behaviour between views
-  pilotAlternateView.toggleViewChange = true
-  --Remove input restriction from alternate view
-  pilotAlternateView.inputSuppression.suppressVehicleInput:clear()
-
-  vehicleBlueprint:MakeWritable()
-  vehicleBlueprint.propertyConnections:add(cameraActiveConnection)
-  vehicleBlueprint.propertyConnections:add(flirEnabledConnection)
-
-  vehicleEntity.runtimeComponentCount = vehicleEntity.runtimeComponentCount + 3
-
-end
-
-Events:Subscribe('Level:RegisterEntityResources', function()
-	ModifyF18Thermal()
-	print('F18 Thermal')
-end)
-function ModifyF18Thermal()
-  local vehicleBlueprint = VehicleBlueprint(ResourceManager:SearchForDataContainer('Vehicles/F18-F/F18'))
-  local vehicleEntity = VehicleEntityData(vehicleBlueprint.object)
-  vehicleEntity:MakeWritable()
-
-
-  local logicReferenceObject = LogicReferenceObjectData()
-  local logicBlueprint = LogicPrefabBlueprint(ResourceManager:SearchForDataContainer('Vehicles/common/LogicalPrefabs/Tank1pFX'))
-  logicReferenceObject.blueprint = logicBlueprint
-  vehicleEntity.components:add(logicReferenceObject)
-
-  local ccd = ResourceManager:FindInstanceByGuid(Guid('3EABB4EF-4003-11E0-8ACA-C41D37DB421C'),Guid('D7A2D4BF-994B-43E7-AC1B-BBAD5F0C619F'))
-  local gunnerCameraComponent = CameraComponentData(ccd)
-  gunnerCameraComponent:MakeWritable()
-  
-
-  local cameraActiveConnection = PropertyConnection()
-  cameraActiveConnection.source = gunnerCameraComponent
-  cameraActiveConnection.sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
-  cameraActiveConnection.target = logicReferenceObject
-  cameraActiveConnection.targetFieldId = -1110218184
-
-  local flirEnabledConnection = PropertyConnection()
-  flirEnabledConnection.source = gunnerCameraComponent
-  flirEnabledConnection.sourceFieldId = MathUtils:FNVHash('ActiveForLocalPlayer')
-  flirEnabledConnection.target = logicReferenceObject
-  flirEnabledConnection.targetFieldId = MathUtils:FNVHash('CameraActive')
-
-  local pilotCamera = ResourceManager:FindInstanceByGuid(Guid('3EABB4EF-4003-11E0-8ACA-C41D37DB421C'),Guid('52DEEDD5-CB0C-4AF3-BC7E-284C8D3C78CB'))
-  local pilotCameraData = StaticCameraData(pilotCamera)
-  pilotCameraData:MakeWritable()
-  -- Remove freelook from alternate view
-  pilotCameraData.yawSensitivityZoomed = 0
-  pilotCameraData.pitchSensitivityZoomed = 0
-
-  local pilotAlter = ResourceManager:FindInstanceByGuid(Guid('3EABB4EF-4003-11E0-8ACA-C41D37DB421C'),Guid('86D8EACB-8637-4BFB-AD0D-9A905DDF812A'))
-  local pilotAlternateView = AlternateCameraViewData(pilotAlter)
-  pilotAlternateView:MakeWritable()
-  -- Enable toggle behaviour between views
-  pilotAlternateView.toggleViewChange = true
-  --Remove input restriction from alternate view
-  pilotAlternateView.inputSuppression.suppressVehicleInput:clear()
-
-  vehicleBlueprint:MakeWritable()
-  vehicleBlueprint.propertyConnections:add(cameraActiveConnection)
-  vehicleBlueprint.propertyConnections:add(flirEnabledConnection)
-
-  vehicleEntity.runtimeComponentCount = vehicleEntity.runtimeComponentCount + 3
-
-end
-
-
---SU-35
-Events:Subscribe('Level:RegisterEntityResources', function()
-	ModifySU35AirThermal()
-	print('SU-35 Air Thermal')
-end)
-function ModifySU35AirThermal()
-  local vehicleBlueprint = VehicleBlueprint(ResourceManager:SearchForDataContainer('Vehicles/SU-35BM-E/SU-35BM-E_SpawnInAir'))
-  local vehicleEntity = VehicleEntityData(vehicleBlueprint.object)
-  vehicleEntity:MakeWritable()
-
-
-  local logicReferenceObject = LogicReferenceObjectData()
-  local logicBlueprint = LogicPrefabBlueprint(ResourceManager:SearchForDataContainer('Vehicles/common/LogicalPrefabs/Tank1pFX'))
-  logicReferenceObject.blueprint = logicBlueprint
-  vehicleEntity.components:add(logicReferenceObject)
-
-  local ccd = ResourceManager:FindInstanceByGuid(Guid('D8A0ED02-46B9-4AE1-8262-2C24995AAED0'),Guid('5DF3CB95-6BDE-425C-A649-4EE7A643BB19'))
-  local gunnerCameraComponent = CameraComponentData(ccd)
-  gunnerCameraComponent:MakeWritable()
-  
-
-  local cameraActiveConnection = PropertyConnection()
-  cameraActiveConnection.source = gunnerCameraComponent
-  cameraActiveConnection.sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
-  cameraActiveConnection.target = logicReferenceObject
-  cameraActiveConnection.targetFieldId = -1110218184
-
-  local flirEnabledConnection = PropertyConnection()
-  flirEnabledConnection.source = gunnerCameraComponent
-  flirEnabledConnection.sourceFieldId = MathUtils:FNVHash('ActiveForLocalPlayer')
-  flirEnabledConnection.target = logicReferenceObject
-  flirEnabledConnection.targetFieldId = MathUtils:FNVHash('CameraActive')
-
-  local pilotCamera = ResourceManager:FindInstanceByGuid(Guid('D8A0ED02-46B9-4AE1-8262-2C24995AAED0'),Guid('55D8EB48-0205-4BA5-B788-8D60E67E7BC4'))
-  local pilotCameraData = StaticCameraData(pilotCamera)
-  pilotCameraData:MakeWritable()
-  -- Remove freelook from alternate view
-  pilotCameraData.yawSensitivityZoomed = 0
-  pilotCameraData.pitchSensitivityZoomed = 0
-
-  local pilotAlter = ResourceManager:FindInstanceByGuid(Guid('D8A0ED02-46B9-4AE1-8262-2C24995AAED0'),Guid('C573B049-1A5F-4422-8C39-11C08DE6FEC3'))
-  local pilotAlternateView = AlternateCameraViewData(pilotAlter)
-  pilotAlternateView:MakeWritable()
-  -- Enable toggle behaviour between views
-  pilotAlternateView.toggleViewChange = true
-  --Remove input restriction from alternate view
-  pilotAlternateView.inputSuppression.suppressVehicleInput:clear()
-
-  vehicleBlueprint:MakeWritable()
-  vehicleBlueprint.propertyConnections:add(cameraActiveConnection)
-  vehicleBlueprint.propertyConnections:add(flirEnabledConnection)
-
-  vehicleEntity.runtimeComponentCount = vehicleEntity.runtimeComponentCount + 3
-
-end
-
-Events:Subscribe('Level:RegisterEntityResources', function()
-	ModifySU35Thermal()
-	print('SU-35 Thermal')
-end)
-function ModifySU35Thermal()
-  local vehicleBlueprint = VehicleBlueprint(ResourceManager:SearchForDataContainer('Vehicles/SU-35BM-E/SU-35BM-E'))
-  local vehicleEntity = VehicleEntityData(vehicleBlueprint.object)
-  vehicleEntity:MakeWritable()
-
-
-  local logicReferenceObject = LogicReferenceObjectData()
-  local logicBlueprint = LogicPrefabBlueprint(ResourceManager:SearchForDataContainer('Vehicles/common/LogicalPrefabs/Tank1pFX'))
-  logicReferenceObject.blueprint = logicBlueprint
-  vehicleEntity.components:add(logicReferenceObject)
-
-  local ccd = ResourceManager:FindInstanceByGuid(Guid('76806015-4BE2-11E0-B502-9B84AFF94A89'),Guid('42ECE6D2-B656-4A8B-805E-FE54B5D8639D'))
-  local gunnerCameraComponent = CameraComponentData(ccd)
-  gunnerCameraComponent:MakeWritable()
-  
-
-  local cameraActiveConnection = PropertyConnection()
-  cameraActiveConnection.source = gunnerCameraComponent
-  cameraActiveConnection.sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
-  cameraActiveConnection.target = logicReferenceObject
-  cameraActiveConnection.targetFieldId = -1110218184
-
-  local flirEnabledConnection = PropertyConnection()
-  flirEnabledConnection.source = gunnerCameraComponent
-  flirEnabledConnection.sourceFieldId = MathUtils:FNVHash('ActiveForLocalPlayer')
-  flirEnabledConnection.target = logicReferenceObject
-  flirEnabledConnection.targetFieldId = MathUtils:FNVHash('CameraActive')
-
-  local pilotCamera = ResourceManager:FindInstanceByGuid(Guid('76806015-4BE2-11E0-B502-9B84AFF94A89'),Guid('D0A5725B-0C0B-4D24-AB2E-A4ECFA47E096'))
-  local pilotCameraData = StaticCameraData(pilotCamera)
-  pilotCameraData:MakeWritable()
-  -- Remove freelook from alternate view
-  pilotCameraData.yawSensitivityZoomed = 0
-  pilotCameraData.pitchSensitivityZoomed = 0
-
-  local pilotAlter = ResourceManager:FindInstanceByGuid(Guid('76806015-4BE2-11E0-B502-9B84AFF94A89'),Guid('1B7C8CCB-1536-42ED-A469-47239C04CA6E'))
-  local pilotAlternateView = AlternateCameraViewData(pilotAlter)
-  pilotAlternateView:MakeWritable()
-  -- Enable toggle behaviour between views
-  pilotAlternateView.toggleViewChange = true
-  --Remove input restriction from alternate view
-  pilotAlternateView.inputSuppression.suppressVehicleInput:clear()
-
-  vehicleBlueprint:MakeWritable()
-  vehicleBlueprint.propertyConnections:add(cameraActiveConnection)
-  vehicleBlueprint.propertyConnections:add(flirEnabledConnection)
-
-  vehicleEntity.runtimeComponentCount = vehicleEntity.runtimeComponentCount + 3
-
-end
-
-
-
--- A10
-Events:Subscribe('Level:RegisterEntityResources', function()
-	ModifyA10Thermal()
-	print('A10 Thermal')
-end)
-function ModifyA10Thermal()
-  local vehicleBlueprint = VehicleBlueprint(ResourceManager:SearchForDataContainer('Vehicles/A-10_THUNDERBOLT/A10_THUNDERBOLT'))
-  local vehicleEntity = VehicleEntityData(vehicleBlueprint.object)
-  vehicleEntity:MakeWritable()
-
-
-  local logicReferenceObject = LogicReferenceObjectData()
-  local logicBlueprint = LogicPrefabBlueprint(ResourceManager:SearchForDataContainer('Vehicles/common/LogicalPrefabs/Tank1pFX'))
-  logicReferenceObject.blueprint = logicBlueprint
-  vehicleEntity.components:add(logicReferenceObject)
-
-  local ccd = ResourceManager:FindInstanceByGuid(Guid('D07E3830-85FD-4C0E-819E-23640D2B2ECB'),Guid('FF2FD7A9-7981-463A-B0F9-EE368853AA4D'))
-  local gunnerCameraComponent = CameraComponentData(ccd)
-  gunnerCameraComponent:MakeWritable()
-  
-
-  local cameraActiveConnection = PropertyConnection()
-  cameraActiveConnection.source = gunnerCameraComponent
-  cameraActiveConnection.sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
-  cameraActiveConnection.target = logicReferenceObject
-  cameraActiveConnection.targetFieldId = -1110218184
-
-  local flirEnabledConnection = PropertyConnection()
-  flirEnabledConnection.source = gunnerCameraComponent
-  flirEnabledConnection.sourceFieldId = MathUtils:FNVHash('ActiveForLocalPlayer')
-  flirEnabledConnection.target = logicReferenceObject
-  flirEnabledConnection.targetFieldId = MathUtils:FNVHash('CameraActive')
-
-  local pilotCamera = ResourceManager:FindInstanceByGuid(Guid('D07E3830-85FD-4C0E-819E-23640D2B2ECB'),Guid('D1BF601E-DD88-483C-AFF4-39D3C4450A09'))
-  local pilotCameraData = StaticCameraData(pilotCamera)
-  pilotCameraData:MakeWritable()
-  -- Remove freelook from alternate view
-  pilotCameraData.yawSensitivityZoomed = 0
-  pilotCameraData.pitchSensitivityZoomed = 0
-
-  local pilotAlter = ResourceManager:FindInstanceByGuid(Guid('D07E3830-85FD-4C0E-819E-23640D2B2ECB'),Guid('012E8729-5030-4AA7-8ACA-B694D8438E18'))
-  local pilotAlternateView = AlternateCameraViewData(pilotAlter)
-  pilotAlternateView:MakeWritable()
-  -- Enable toggle behaviour between views
-  pilotAlternateView.toggleViewChange = true
-  --Remove input restriction from alternate view
-  pilotAlternateView.inputSuppression.suppressVehicleInput:clear()
-
-  vehicleBlueprint:MakeWritable()
-  vehicleBlueprint.propertyConnections:add(cameraActiveConnection)
-  vehicleBlueprint.propertyConnections:add(flirEnabledConnection)
-
-  vehicleEntity.runtimeComponentCount = vehicleEntity.runtimeComponentCount + 3
-
-end
-
-Events:Subscribe('Level:RegisterEntityResources', function()
-	ModifySU25Thermal()
-	print('SU25 Thermal')
-end)
-function ModifySU25Thermal()
-  local vehicleBlueprint = VehicleBlueprint(ResourceManager:SearchForDataContainer('Vehicles/SU-25TM/SU-25TM'))
-  local vehicleEntity = VehicleEntityData(vehicleBlueprint.object)
-  vehicleEntity:MakeWritable()
-
-
-  local logicReferenceObject = LogicReferenceObjectData()
-  local logicBlueprint = LogicPrefabBlueprint(ResourceManager:SearchForDataContainer('Vehicles/common/LogicalPrefabs/Tank1pFX'))
-  logicReferenceObject.blueprint = logicBlueprint
-  vehicleEntity.components:add(logicReferenceObject)
-
-  local ccd = ResourceManager:FindInstanceByGuid(Guid('08D7A80F-BCB4-44FA-8DDF-AE65F096046D'),Guid('F06A05AC-3D4B-4A26-8581-60E065CBEE70'))
-  local gunnerCameraComponent = CameraComponentData(ccd)
-  gunnerCameraComponent:MakeWritable()
-  
-
-  local cameraActiveConnection = PropertyConnection()
-  cameraActiveConnection.source = gunnerCameraComponent
-  cameraActiveConnection.sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
-  cameraActiveConnection.target = logicReferenceObject
-  cameraActiveConnection.targetFieldId = -1110218184
-
-  local flirEnabledConnection = PropertyConnection()
-  flirEnabledConnection.source = gunnerCameraComponent
-  flirEnabledConnection.sourceFieldId = MathUtils:FNVHash('ActiveForLocalPlayer')
-  flirEnabledConnection.target = logicReferenceObject
-  flirEnabledConnection.targetFieldId = MathUtils:FNVHash('CameraActive')
-
-  local pilotCamera = ResourceManager:FindInstanceByGuid(Guid('08D7A80F-BCB4-44FA-8DDF-AE65F096046D'),Guid('439CD68E-DB87-4430-BA6C-8E030594492D'))
-  local pilotCameraData = StaticCameraData(pilotCamera)
-  pilotCameraData:MakeWritable()
-  -- Remove freelook from alternate view
-  pilotCameraData.yawSensitivityZoomed = 0
-  pilotCameraData.pitchSensitivityZoomed = 0
-
-  local pilotAlter = ResourceManager:FindInstanceByGuid(Guid('08D7A80F-BCB4-44FA-8DDF-AE65F096046D'),Guid('29CDFDAA-14E0-40A5-B247-036BF7E6D170'))
-  local pilotAlternateView = AlternateCameraViewData(pilotAlter)
-  pilotAlternateView:MakeWritable()
-  -- Enable toggle behaviour between views
-  pilotAlternateView.toggleViewChange = true
-  --Remove input restriction from alternate view
-  pilotAlternateView.inputSuppression.suppressVehicleInput:clear()
-
-  vehicleBlueprint:MakeWritable()
-  vehicleBlueprint.propertyConnections:add(cameraActiveConnection)
-  vehicleBlueprint.propertyConnections:add(flirEnabledConnection)
-
-  vehicleEntity.runtimeComponentCount = vehicleEntity.runtimeComponentCount + 3
-
-end
-
---modifying Humvee-ASRAD
-Events:Subscribe('Level:RegisterEntityResources', function()
-	ModifyASRADThermal()
-	print('Humvee-ASRAD Thermal')
-end)
-function ModifyASRADThermal()
- local vehicleBlueprint = VehicleBlueprint(ResourceManager:SearchForDataContainer('Vehicles/XP5/Humvee_ASRAD/Humvee_ASRAD'))
- local vehicleEntity = VehicleEntityData(vehicleBlueprint.object)
- vehicleEntity:MakeWritable()
-
- local logicReferenceObject = LogicReferenceObjectData()
- local logicBlueprint = LogicPrefabBlueprint(ResourceManager:SearchForDataContainer('Vehicles/common/LogicalPrefabs/Tank1pFX'))
- logicReferenceObject.blueprint = logicBlueprint
- vehicleEntity.components:add(logicReferenceObject)
-
- local ccd = ResourceManager:FindInstanceByGuid(Guid('F7C250D2-ECEB-481F-A130-D91FE8B693E0'),Guid('FB50FF37-1CFC-466A-9F67-3ADDEF07EAE3'))
- local gunnerCameraComponent = CameraComponentData(ccd)
- gunnerCameraComponent:MakeWritable()
-
- local cameraActiveConnection = PropertyConnection()
- cameraActiveConnection.source = gunnerCameraComponent
- cameraActiveConnection.sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
- cameraActiveConnection.target = logicReferenceObject
- cameraActiveConnection.targetFieldId = -1110218184
-
- local flirEnabledConnection = PropertyConnection()
- flirEnabledConnection.source = gunnerCameraComponent
- flirEnabledConnection.sourceFieldId = MathUtils:FNVHash('ActiveForLocalPlayer')
- flirEnabledConnection.target = logicReferenceObject
- flirEnabledConnection.targetFieldId = MathUtils:FNVHash('CameraActive')
-
- vehicleBlueprint:MakeWritable()
- vehicleBlueprint.propertyConnections:add(cameraActiveConnection)
- vehicleBlueprint.propertyConnections:add(flirEnabledConnection)
-
- vehicleEntity.runtimeComponentCount = vehicleEntity.runtimeComponentCount + 3
-
-end
-
-
---modifying VodnikPhoenix AA
-Events:Subscribe('Level:RegisterEntityResources', function()
-	ModifyVodnikPhoenixThermal()
-	print('VodnikPhoenix Thermal')
-end)
-function ModifyVodnikPhoenixThermal()
- local vehicleBlueprint = VehicleBlueprint(ResourceManager:SearchForDataContainer('Vehicles/XP5/VodnikPhoenix/VodnikPhoenix'))
- local vehicleEntity = VehicleEntityData(vehicleBlueprint.object)
- vehicleEntity:MakeWritable()
-
- local logicReferenceObject = LogicReferenceObjectData()
- local logicBlueprint = LogicPrefabBlueprint(ResourceManager:SearchForDataContainer('Vehicles/common/LogicalPrefabs/Tank1pFX'))
- logicReferenceObject.blueprint = logicBlueprint
- vehicleEntity.components:add(logicReferenceObject)
-
- local ccd = ResourceManager:FindInstanceByGuid(Guid('4DBB5F24-30D5-4CF1-819B-D6E95561D62F'),Guid('E890BD38-607D-4176-BDD2-6AA8443C1688'))
- local gunnerCameraComponent = CameraComponentData(ccd)
- gunnerCameraComponent:MakeWritable()
-
-
- local cameraActiveConnection = PropertyConnection()
- cameraActiveConnection.source = gunnerCameraComponent
- cameraActiveConnection.sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
- cameraActiveConnection.target = logicReferenceObject
- cameraActiveConnection.targetFieldId = -1110218184
-
- local flirEnabledConnection = PropertyConnection()
- flirEnabledConnection.source = gunnerCameraComponent
- flirEnabledConnection.sourceFieldId = MathUtils:FNVHash('ActiveForLocalPlayer')
- flirEnabledConnection.target = logicReferenceObject
- flirEnabledConnection.targetFieldId = MathUtils:FNVHash('CameraActive')
-
- vehicleBlueprint:MakeWritable()
- vehicleBlueprint.propertyConnections:add(cameraActiveConnection)
- vehicleBlueprint.propertyConnections:add(flirEnabledConnection)
-
- vehicleEntity.runtimeComponentCount = vehicleEntity.runtimeComponentCount + 3
-
-end
-
-
-
 -- These vehicles all use the same existing logic to toggle zoom level.
 -- This logic blueprint is "Vehicles/common/LogicalPrefabs/Tank1pFX"
 -- The behaviour can be changed from zoom to FLIR by modifying the connection that toggles the view change
@@ -849,12 +431,18 @@ end
 
 
 
---Helicopter fixed view
+--Helicopter and jet fixed view
 local StaticCameraZoomConfigs = {
 	['AH1Z'] = { partition = Guid("643135EA-6CA7-11DF-B6FA-F715AA601362"),instance = Guid("549AF5DF-BB5F-4B89-9EF7-79FD8B772F78"),},
 	['AH6'] = { partition = Guid("FD8AB747-FF4D-11DD-A7B1-F7C6DEEC9D32"),instance = Guid("15AB2B39-FF4E-11DD-A7B1-F7C6DEEC9D32"),},
 	['MI-28'] = { partition = Guid("89BE53B6-2FF4-11DE-8C23-DAB1D69416DE"),instance = Guid("89BEA215-2FF4-11DE-8C23-DAB1D69416DE"),},
 	['Z11-W'] = { partition = Guid("D78088E5-38B7-11DE-BF1C-984D9AEE762C"),instance = Guid("D780B026-38B7-11DE-BF1C-984D9AEE762C"),},
+    ['F18'] = { partition = Guid('3EABB4EF-4003-11E0-8ACA-C41D37DB421C'),instance = Guid('52DEEDD5-CB0C-4AF3-BC7E-284C8D3C78CB'),},
+    ['F18-Air'] = { partition = Guid('99E0A725-E473-4A6C-8421-087F390AABFB'),instance = Guid('429CE50C-EE84-44A6-BCB4-4FD749D30C9F'),},
+	['SU35'] = { partition = Guid('76806015-4BE2-11E0-B502-9B84AFF94A89'),instance = Guid('D0A5725B-0C0B-4D24-AB2E-A4ECFA47E096'),},
+    ['SU35-Air'] = { partition = Guid('D8A0ED02-46B9-4AE1-8262-2C24995AAED0'),instance = Guid('55D8EB48-0205-4BA5-B788-8D60E67E7BC4'),},
+    ['A10'] = { partition = Guid('D07E3830-85FD-4C0E-819E-23640D2B2ECB'), instance = Guid('D1BF601E-DD88-483C-AFF4-39D3C4450A09'),},
+    ['SU-25'] = { partition = Guid('08D7A80F-BCB4-44FA-8DDF-AE65F096046D'),instance = Guid('439CD68E-DB87-4430-BA6C-8E030594492D'),},
 }
 function ModifyStaticCameraZoom(instance)
 	local pilotCameraData = StaticCameraData(instance)
@@ -874,6 +462,12 @@ local PilotAlternateViewZoomConfigs = {
 	['AH6'] = { partition = Guid("FD8AB747-FF4D-11DD-A7B1-F7C6DEEC9D32"),instance = Guid("15AB2B3A-FF4E-11DD-A7B1-F7C6DEEC9D32"),},
 	['MI-28'] = { partition = Guid("89BE53B6-2FF4-11DE-8C23-DAB1D69416DE"),instance = Guid("89BEA243-2FF4-11DE-8C23-DAB1D69416DE"),},
 	['Z11-W'] = { partition = Guid("D78088E5-38B7-11DE-BF1C-984D9AEE762C"),instance = Guid("D780B027-38B7-11DE-BF1C-984D9AEE762C"),},
+    ['F18'] = { partition = Guid('3EABB4EF-4003-11E0-8ACA-C41D37DB421C'),instance = Guid('86D8EACB-8637-4BFB-AD0D-9A905DDF812A'),},
+    ['F18-Air'] = { partition = Guid('99E0A725-E473-4A6C-8421-087F390AABFB'),instance = Guid('536B72DD-58EB-474D-B973-B183B2FFC34B'),},
+	['SU35'] = { partition = Guid('76806015-4BE2-11E0-B502-9B84AFF94A89'),instance = Guid('1B7C8CCB-1536-42ED-A469-47239C04CA6E'),},
+    ['SU35-Air'] = { partition = Guid('D8A0ED02-46B9-4AE1-8262-2C24995AAED0'),instance = Guid('C573B049-1A5F-4422-8C39-11C08DE6FEC3'),},
+    ['A10'] = { partition = Guid('D07E3830-85FD-4C0E-819E-23640D2B2ECB'), instance = Guid('012E8729-5030-4AA7-8ACA-B694D8438E18'),},
+    ['SU-25'] = { partition = Guid('08D7A80F-BCB4-44FA-8DDF-AE65F096046D'),instance = Guid('29CDFDAA-14E0-40A5-B247-036BF7E6D170'),},
 }
 function ModifyPilotAlternateViewZoom(instance)
 	local pilotAlternateView = AlternateCameraViewData(instance)
@@ -888,6 +482,115 @@ end
 for id, config in pairs(PilotAlternateViewZoomConfigs) do
 	ResourceManager:RegisterInstanceLoadHandler(config.partition, config.instance, ModifyPilotAlternateViewZoom)
 end
+
+
+--Jet and XP5 AA Thermal
+local JetFlirGuids = {
+    ['F18'] = {
+        partition = Guid('3EABB4EF-4003-11E0-8ACA-C41D37DB421C'),
+        camera = Guid('D7A2D4BF-994B-43E7-AC1B-BBAD5F0C619F'),
+    },
+    ['F18-Air'] = {
+        partition = Guid('99E0A725-E473-4A6C-8421-087F390AABFB'),
+        camera = Guid('B6FFB14E-A0A2-4BCB-9608-AAA54BA0480D'),
+    },
+    ['SU35'] = {
+        partition = Guid('76806015-4BE2-11E0-B502-9B84AFF94A89'),
+        camera = Guid('42ECE6D2-B656-4A8B-805E-FE54B5D8639D'),
+    },
+    ['SU35-Air'] = {
+        partition = Guid('D8A0ED02-46B9-4AE1-8262-2C24995AAED0'),
+        camera = Guid('5DF3CB95-6BDE-425C-A649-4EE7A643BB19'),
+    },
+    ['A10'] = {
+        partition = Guid('D07E3830-85FD-4C0E-819E-23640D2B2ECB'),
+        camera = Guid('FF2FD7A9-7981-463A-B0F9-EE368853AA4D'),
+    },
+    ['SU-25'] = {
+        partition = Guid('08D7A80F-BCB4-44FA-8DDF-AE65F096046D'),
+        camera = Guid('F06A05AC-3D4B-4A26-8581-60E065CBEE70'),
+    },
+	['Humvee-ASRAD'] = {
+        partition = Guid('F7C250D2-ECEB-481F-A130-D91FE8B693E0'),
+        camera = Guid('FB50FF37-1CFC-466A-9F67-3ADDEF07EAE3'),
+    },
+	['VodnikPhoenix'] = {
+		partition = Guid('4DBB5F24-30D5-4CF1-819B-D6E95561D62F'),
+		camera = Guid('E890BD38-607D-4176-BDD2-6AA8443C1688'),
+    },
+
+}
+
+Events:Subscribe('Level:RegisterEntityResources', function()
+	for id, guids in pairs(JetFlirGuids) do
+        ModifyJetFLIR(guids, id)
+    end
+end)
+
+function ModifyJetFLIR(guids, id)
+    local partition = ResourceManager:FindDatabasePartition(guids.partition)
+    if partition == nil then
+        -- Partition not found, current map does not have this vehicle
+        return
+    end
+
+    -- Get the relevant instances for modification
+    local vehicleBlueprint = VehicleBlueprint(partition.primaryInstance)
+    vehicleBlueprint:MakeWritable()
+    local vehicleEntity = VehicleEntityData(vehicleBlueprint.object)
+    vehicleEntity:MakeWritable()
+
+    -- Add the Tank1pFX logic blueprint to the vehicle
+    local logicBlueprint = LogicPrefabBlueprint(ResourceManager:SearchForDataContainer('Vehicles/common/LogicalPrefabs/Tank1pFX'))
+    local logicReferenceObject = LogicReferenceObjectData()
+    logicReferenceObject.blueprint = logicBlueprint 
+    vehicleEntity.components:add(logicReferenceObject)
+
+    -- Get the pilot's 1st person camera component
+    local cameraComponent = partition:FindInstance(guids.camera)
+
+    -- Tell the logic blueprint when the pilot camera is active
+    local camerActiveConnection = PropertyConnection()
+    camerActiveConnection.source = cameraComponent
+    camerActiveConnection.sourceFieldId = MathUtils:FNVHash('ActiveForLocalPlayer')
+    camerActiveConnection.target = logicReferenceObject
+    camerActiveConnection.targetFieldId = MathUtils:FNVHash('CameraActive')
+    vehicleBlueprint.propertyConnections:add(camerActiveConnection)
+
+    -- Tell the logic blueprint when alternate view (= right click view) is active
+    local flirEnabledConnection = PropertyConnection()
+    flirEnabledConnection.source = cameraComponent
+    flirEnabledConnection.sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
+    flirEnabledConnection.target = logicReferenceObject
+    flirEnabledConnection.targetFieldId = -1110218184 -- Input event that triggers the FLIR VisualEnvironment
+    vehicleBlueprint.propertyConnections:add(flirEnabledConnection)
+
+    print('Added FLIR to ' .. id)
+end
+
+
+--[[Events:Subscribe('Level:LoadResources', function()
+	ResourceManager:MountSuperBundle('xp3chunks')
+	ResourceManager:MountSuperBundle('levels/xp3_alborz/xp3_alborz')
+end)]]
+
+--[[Hooks:Install('ResourceManager:LoadBundles', 100, function(hook, bundles, compartment)
+    if #bundles == 1 and bundles[1] == SharedUtils:GetLevelName() then
+        print('Injecting bundles.')
+
+        bundles = {
+        'levels/xp3_alborz/xp3_alborz',
+        'levels/xp3_alborz/rushlarge0',
+		bundles[1],
+        }
+
+        hook:Pass(bundles, compartment)
+    end
+end)
+Events:Subscribe('Level:RegisterEntityResources', function(levelData)
+	local Registry = RegistryContainer(ResourceManager:SearchForInstanceByGuid(Guid('6C72B9D2-484E-A4D0-94FA-8A8D39357040'))) 
+    ResourceManager:AddRegistry(Registry, ResourceCompartment.ResourceCompartment_Game)
+end)]]
 
 --Open Air Superiority
 --[[Events:Subscribe('Level:LoadResources', function()
