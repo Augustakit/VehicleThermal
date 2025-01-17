@@ -1,6 +1,6 @@
-Thank Janssent for his support and guidance.
+感谢Janssent的支持和指导.
 
-Added thermal imaging function for the driver's seat, such as AH1Z, AH6, EOD, AC130, while some vehicles such as M114 and RHINO have added thermal imaging function for the passenger seat.
+为驾驶员增加了热成像功能，如AH1Z、AH6、EOD、AC130，而M114和RHINO等一些车辆为乘客座椅增加了热成像功能.新增jet和XP5 AA的热成像
 # screenshot
 ![Client Screenshot 2024 07 21 - 13 06 36 88](https://github.com/user-attachments/assets/ec92238e-b413-4482-8b95-e65510ea8feb)
 ![Client Screenshot 2024 07 21 - 13 04 00 19](https://github.com/user-attachments/assets/dbf11fc6-2a70-4571-8726-f7eec381e4bc)
