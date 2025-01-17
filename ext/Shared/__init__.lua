@@ -1,29 +1,29 @@
---Helicopter
+--武装直升机
   --AH1Z
-ResourceManager:RegisterInstanceLoadHandler(Guid("643135EA-6CA7-11DF-B6FA-F715AA601362"), Guid("A676D498-A524-42AD-BE78-72B071D8CD6A"), function(instance)
+ ResourceManager:RegisterInstanceLoadHandler(Guid('643135EA-6CA7-11DF-B6FA-F715AA601362'), Guid('A676D498-A524-42AD-BE78-72B071D8CD6A'), function(instance)
 	local vehicleBlueprint = VehicleBlueprint(instance)
 	vehicleBlueprint:MakeWritable()
-	--Elimination of the co-pilot having a thermal imaging view without zooming the field of view
+	--消除副驾驶未开镜就有热成像视角的情况
 	vehicleBlueprint.propertyConnections[26].sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
 	vehicleBlueprint.propertyConnections:erase(27)
 
-	print("added  AH1Z IR field connection")
+	print('added  AH1Z IR field connection')
 end)
 
   --mi-28
-ResourceManager:RegisterInstanceLoadHandler(Guid("89BE53B6-2FF4-11DE-8C23-DAB1D69416DE"), Guid("89BEA1D6-2FF4-11DE-8C23-DAB1D69416DE"), function(instance)
+ResourceManager:RegisterInstanceLoadHandler(Guid('89BE53B6-2FF4-11DE-8C23-DAB1D69416DE'), Guid('89BEA1D6-2FF4-11DE-8C23-DAB1D69416DE'), function(instance)
 	local vehicleBlueprint = VehicleBlueprint(instance)
 	vehicleBlueprint:MakeWritable()
-	--Elimination of the co-pilot having a thermal imaging view without zooming the field of view
+	--消除副驾驶未开镜就有热成像视角的情况
 	vehicleBlueprint.propertyConnections[28].sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
 	vehicleBlueprint.propertyConnections:erase(27)
-	print("added Mi-28 IR field connection")
+	print('added Mi-28 IR field connection')
 end)
 
 
 --Tank
 
-  --M1A2（Luckily, the thermal imaging capabilities of the main driver, co-pilot, and spotter were retained.）
+  --M1A2（幸运的保留了主驾驶、副驾驶以及观测手的热成像功能）
 ResourceManager:RegisterInstanceLoadHandler(Guid('B069BA89-EECF-11DD-8117-9421284A74E5'), Guid('B06A08AB-EECF-11DD-8117-9421284A74E5'), function(instance)
 	local partition = instance.partition
 
@@ -43,7 +43,7 @@ ResourceManager:RegisterInstanceLoadHandler(Guid('B069BA89-EECF-11DD-8117-942128
 	print('M1A2 FLIR Connect')
 end)
 
-  --T90（Only the primary and co-pilot views were retained at the expense of the observer's thermal imaging view.）
+  --T90（只保留了主驾驶和副驾驶的视野，牺牲了观测手的热成像视野）
 ResourceManager:RegisterInstanceLoadHandler(Guid('60106974-DD7D-11DD-A030-B04E425BA11E'), Guid('60106975-DD7D-11DD-A030-B04E425BA11E'), function(instance)
 	local partition = instance.partition
 
@@ -65,14 +65,14 @@ end)
 
 
 
---IFV
+--步战车
   --LAV-25
 ResourceManager:RegisterInstanceLoadHandler(Guid('D124CDD4-FE2A-11DF-BB74-FD1A26B74EE5'), Guid('ADF563C9-28B1-C42B-993E-B2FD40F36078'), function(instance)
 	local vehicleBlueprint = VehicleBlueprint(instance)
 	vehicleBlueprint:MakeWritable()
-	--Elimination of the co-pilot having a thermal imaging view without zooming the field of view
+	--消除副驾驶未开镜就有热成像视角的情况
 	vehicleBlueprint.propertyConnections[74].sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
-	--Elimination of thermal imaging view without zoomed field of view for the main driver
+	--消除主驾驶未开镜就有热成像视角的情况
 	vehicleBlueprint.propertyConnections[76].sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
 	vehicleBlueprint.propertyConnections:erase(77)
 
@@ -83,10 +83,10 @@ end)
 ResourceManager:RegisterInstanceLoadHandler(Guid('B791D5BE-5010-49EF-895D-677F5DCE16CB'), Guid('4092E519-1C9F-4243-88AE-E27F4F663E34'), function(instance)
 	local vehicleBlueprint = VehicleBlueprint(instance)
 	vehicleBlueprint:MakeWritable()
-	--Elimination of the co-pilot having a thermal imaging view without zooming the field of view
+	--消除副驾驶未开镜就有热成像视角的情况
 	vehicleBlueprint.propertyConnections[74].sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
-	--Elimination of thermal imaging view without zoomed field of view for the main driver
-	vehicleBlueprint.propertyConnections[76].sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut') --In1
+	--消除主驾驶未开镜就有热成像视角的情况
+	vehicleBlueprint.propertyConnections[76].sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
 	vehicleBlueprint.propertyConnections:erase(77)  --In2
 
 	print('LAV-25 XP5 FLIR Connect')
@@ -97,9 +97,9 @@ end)
 ResourceManager:RegisterInstanceLoadHandler(Guid('AAE95906-AFD4-11DD-84FB-9FA71F68ED5E'), Guid('AAE95907-AFD4-11DD-84FB-9FA71F68ED5E'), function(instance)
 	local vehicleBlueprint = VehicleBlueprint(instance)
 	vehicleBlueprint:MakeWritable()
-	--Elimination of the co-pilot having a thermal imaging view without zooming the field of view
+	--消除副驾驶未开镜就有热成像视角的情况
 	vehicleBlueprint.propertyConnections[34].sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
-	--Elimination of thermal imaging view without zoomed field of view for the main driver
+	--消除主驾驶未开镜就有热成像视角的情况
 	vehicleBlueprint.propertyConnections[33].sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
 	vehicleBlueprint.propertyConnections:erase(32)
 
@@ -110,9 +110,9 @@ end)
 ResourceManager:RegisterInstanceLoadHandler(Guid('DD6BCB51-A4FA-4743-910E-E7B953834089'), Guid('086AFD23-5DD9-430F-9430-B1DAA502DB0F'), function(instance)
 	local vehicleBlueprint = VehicleBlueprint(instance)
 	vehicleBlueprint:MakeWritable()
-	--Elimination of the co-pilot having a thermal imaging view without zooming the field of view
+	--消除副驾驶未开镜就有热成像视角的情况
 	vehicleBlueprint.propertyConnections[34].sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
-	--Elimination of thermal imaging view without zoomed field of view for the main driver
+	--消除主驾驶未开镜就有热成像视角的情况
 	vehicleBlueprint.propertyConnections[33].sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
 	vehicleBlueprint.propertyConnections:erase(32)
 
@@ -123,9 +123,9 @@ end)
 ResourceManager:RegisterInstanceLoadHandler(Guid('22CFC313-4DD1-49E6-B45F-A8B1194105C5'), Guid('F998F5E4-220D-463A-A437-1C18D5C3A19E'), function(instance)
 	local vehicleBlueprint = VehicleBlueprint(instance)
 	vehicleBlueprint:MakeWritable()
-	--Elimination of the co-pilot having a thermal imaging view without zooming the field of view
+	--消除副驾驶未开镜就有热成像视角的情况
 	vehicleBlueprint.propertyConnections[72].sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
-	--Elimination of thermal imaging view without zoomed field of view for the main driver
+	--消除主驾驶未开镜就有热成像视角的情况
 	vehicleBlueprint.propertyConnections[70].sourceFieldId = MathUtils:FNVHash('AlternateViewEnabledOut')
 	vehicleBlueprint.propertyConnections:erase(71)
 
@@ -133,20 +133,17 @@ ResourceManager:RegisterInstanceLoadHandler(Guid('22CFC313-4DD1-49E6-B45F-A8B119
 end)
 
 
--- These vehicles all use the same existing logic to toggle zoom level.
--- This logic blueprint is "Vehicles/common/LogicalPrefabs/Tank1pFX"
--- The behaviour can be changed from zoom to FLIR by modifying the connection that toggles the view change
+--AC130和固定AA热成像功能
 local zoomVehicleConfigs = {
    --AC130
-   ['AC130 Tank'] = { partition = Guid("DE5A1D34-981C-11E1-B304-EDC7D93268C6"), instance =  Guid("561E82B1-FDB8-CE19-B9B5-79CB5B57E94F"), index = 8 },
-   ['AC130 25MM'] = { partition = Guid("DE5A1D34-981C-11E1-B304-EDC7D93268C6"), instance =  Guid("561E82B1-FDB8-CE19-B9B5-79CB5B57E94F"), index = 21 },
-   --C-RAM AA
-   ['C-RAM'] = { partition = Guid("5114C378-874C-4883-90B7-8F2EDC0D97FC"), instance =  Guid("19B63F53-5FD5-4A82-9EF8-B43A2243E9D9"), index = 3 },
-   ['Centurion_C-RAM_Carrier'] = { partition = Guid("CBBF50EA-33A3-11E0-990F-8A81B775F8D1"), instance =  Guid("D35CA587-79AF-D351-6F65-967794C7F1B7"), index = 3 },
-   --Pantsir AA
-   ['Pantsir'] = { partition = Guid("16DB88EB-7E17-11E0-8BC2-FE5C7E48AEB1"), instance =  Guid("C645317B-45BB-E082-7E5C-918388C22D59"), index = 4 },
+   ['AC130 Tank'] = { partition = Guid('DE5A1D34-981C-11E1-B304-EDC7D93268C6'), instance =  Guid('561E82B1-FDB8-CE19-B9B5-79CB5B57E94F'), index = 8 },
+   ['AC130 25MM'] = { partition = Guid('DE5A1D34-981C-11E1-B304-EDC7D93268C6'), instance =  Guid('561E82B1-FDB8-CE19-B9B5-79CB5B57E94F'), index = 21 },
+   --美军固定AA“百夫长”
+   ['C-RAM'] = { partition = Guid('5114C378-874C-4883-90B7-8F2EDC0D97FC'), instance =  Guid('19B63F53-5FD5-4A82-9EF8-B43A2243E9D9'), index = 3 },
+   ['Centurion_C-RAM_Carrier'] = { partition = Guid('CBBF50EA-33A3-11E0-990F-8A81B775F8D1'), instance =  Guid('D35CA587-79AF-D351-6F65-967794C7F1B7'), index = 3 },
+   --俄军固定AA“铠甲s1”
+   ['Pantsir'] = { partition = Guid('16DB88EB-7E17-11E0-8BC2-FE5C7E48AEB1'), instance =  Guid('C645317B-45BB-E082-7E5C-918388C22D59'), index = 4 },
 }
-
 function ModifyZoomVehicle(index, instance)
 	local vehicleBlueprint = VehicleBlueprint(instance)
     vehicleBlueprint:MakeWritable()
@@ -163,7 +160,7 @@ end
 
 
 
---Atkhel driver thermal link
+--武直驾驶员热成像链接
 local AtkHelFLIRConfigs = {
 	['AH1Z'] = {
 	partition = Guid('643135EA-6CA7-11DF-B6FA-F715AA601362'),
@@ -214,7 +211,7 @@ end
 
 
 
---Thermal imaging connection of IFV
+--步战车热成像连接
 local IFVFLIRConfigs = {
 	['LAV-25'] =
 	{ partition = Guid('D124CDD4-FE2A-11DF-BB74-FD1A26B74EE5'),
@@ -268,9 +265,9 @@ end
 
 
 
-
+--部分载具热成像连接功能
 local FLIRConnectionConfigs = {
-	--scout helicopter（The main driver clicks the right mouse button to open the thermal imaging view, but the co-pilot's observational thermal imaging function is destroyed）
+	--侦察直升机（主驾驶点击鼠标右键即可开启热成像视角，但副驾驶的观测热成像功能却被破坏了）
     ['AH6'] = {
         partition = Guid('FD8AB747-FF4D-11DD-A7B1-F7C6DEEC9D32'),
         instance = Guid('FD8AB748-FF4D-11DD-A7B1-F7C6DEEC9D32'),
@@ -283,35 +280,35 @@ local FLIRConnectionConfigs = {
         pilots = Guid('D780B025-38B7-11DE-BF1C-984D9AEE762C'),
         veLogics = Guid('20438013-5978-4BD9-A244-E0C742834B1C'),
     },
-	--Co-pilot thermal imaging capability for some ground vehicles.
+	--部分地面载具的副驾驶热成像功能
     ['AAV-7V1'] = {
         partition = Guid('F0530CEB-5F63-11E0-858A-FC3FD696384C'),
         instance = Guid('1E8653E6-11A0-DF93-C808-E48351D2F578'),
         pilots = Guid('EC478588-8869-4E6B-BC54-209AFDB118B6'),
         veLogics = Guid('AD374D48-B29E-4F2E-B80C-F8E8E0FDBD40'),
     },
-	--M1114
+	--M1114悍马
     ['Humvee'] = {
         partition = Guid('611F48A3-0919-11E0-985D-C512734E48AF'),
         instance = Guid('D1B516CA-6119-F025-C923-1B0700B6AEBA'),
         pilots = Guid('77BDC1CD-5426-4629-BAB7-EC4755146E13'),
         veLogics = Guid('FC1BED82-3985-4C2F-85C0-1AE487B01BD5'),
     },
-    --GAZ-3937
+    --GAZ-3937沃德尼克
     ['GAZ-3937'] = {
         partition = Guid('B9E8F531-DF6E-4221-BD32-A8D15CB2E8C8'),
         instance = Guid('98E5B9BF-0B68-4AF0-A20D-1A23D6B6BF8B'),
         pilots = Guid('F44EB7BA-155F-4026-BEF8-3240D1486D98'),
         veLogics = Guid('15D78034-0943-4F8E-867A-6A51580DD83B'),
     },
-    --M142 Himars（Note that the 3X field of view must be selected in the customization screen to use the thermal imaging feature）
+    --M142海马斯（需要注意的是，自行火炮需要在自定义界面选择3X视野才可以使用热成像功能）
     ['M142'] = {
         partition = Guid('ECE82307-9454-11E1-9418-9BD47D974A22'),
         instance = Guid('04331C0E-9651-8073-E772-2010E5ACF88D'),
         pilots = Guid('7E1EC83F-A480-416A-BC9F-C72A0092BACE'),
         veLogics = Guid('8E9B1B5D-3001-4797-9A4C-03BB81B3BDE9'),
     },
-	--BM-23（Note that the 3X field of view must be selected in the customization screen to use the thermal imaging feature）
+	--BM-23（需要注意的是，自行火炮需要在自定义界面选择3X视野才可以使用热成像功能）
     ['BM-23'] = {
         partition = Guid('65CE090F-3CFC-11E1-BDB2-A81058AAD7AA'),
         instance = Guid('C3F3DE57-2E0F-F4BD-0C18-B95E7C5E0515'),
@@ -357,16 +354,15 @@ for id, config in pairs(FLIRConnectionConfigs) do
     end)
 end
 
-
-
-
---Gadgets Thermal
+--部分附件热成像连接
 local GadgetsFLIRConfigs = {
+	--排爆机器人
 	['EOD'] = {
 	partition = Guid('269BB4A2-0DC3-11E0-B817-B1885439A6BF'),
 	instance = Guid('6CA1F97D-5E4F-D411-DDC2-974E1E2133A5'),
 	pilots = Guid('A2F7EC6F-2230-491A-BC0F-91050CA270EA'),
 	veLogics = Guid('A458A861-977E-4724-9929-FC3A71C41DDF'),},
+	--雷射指示器
 	['SOFLAM'] = {
 	partition = Guid('7432AA7D-1802-11E0-8BA5-9B1E2E41035E'),
 	instance = Guid('2A644984-ADB6-AD04-0534-C11BB4BEB91D'),
@@ -396,29 +392,30 @@ for id, config in pairs(GadgetsFLIRConfigs) do
     end)
 end
 
---The following segments are the co-pilot's view with the camera on and the UI adjustments, the default 3x field of view has now been adjusted to 1x for various considerations.
+--以下这些段是副驾驶开镜后的视角以及UI调整，默认3倍视野，为各种考虑，现已经调为1倍镜）
 local NoZoomVehicleConfigs = {
-	['M1A2'] = { partition = Guid("B069BA89-EECF-11DD-8117-9421284A74E5"),instance = Guid("B06A096D-EECF-11DD-8117-9421284A74E5"), meshOffsetz = 0.3700000047683716},--0.9779999852180481
-	['T90'] = { partition = Guid("60106974-DD7D-11DD-A030-B04E425BA11E"),instance = Guid("6BA00DB1-C4E1-4598-AD56-84CFBDC55FE6"), meshOffsetz = 0.3700000047683716},--0.9779999852180481
-	['LAV-25'] = { partition = Guid("D124CDD4-FE2A-11DF-BB74-FD1A26B74EE5"),instance = Guid("A99CF3B4-F605-421C-9371-E9DD925BD862"), meshOffsetz = 0.3700000047683716},--0.9779999852180481
-	['LAV-25 XP5'] = { partition = Guid("B791D5BE-5010-49EF-895D-677F5DCE16CB"),instance = Guid("1F77DA90-7FE4-4D9F-9ED1-FEBFEBB53452"), meshOffsetz = 0.3700000047683716},--0.9779999852180481
-	['BMP-2M'] = { partition = Guid("AAE95906-AFD4-11DD-84FB-9FA71F68ED5E"),instance = Guid("42A07684-EA97-4B74-B45E-579346B1C404"), meshOffsetz = 0.3700000047683716},--0.9779999852180481
-	['BMP-2M XP5'] = { partition = Guid("DD6BCB51-A4FA-4743-910E-E7B953834089"),instance = Guid("1493B7B8-1EF6-49ED-930C-18398794A54C"), meshOffsetz = 0.3700000047683716},--0.9779999852180481
-	['BTR-90'] = { partition = Guid("22CFC313-4DD1-49E6-B45F-A8B1194105C5"),instance = Guid("9BC3FD4A-EA7F-4661-B5B5-15933654E675"), meshOffsetz = 0.3700000047683716},--0.9779999852180481
-	['AAV-7V1'] = { partition = Guid("F0530CEB-5F63-11E0-858A-FC3FD696384C"),instance = Guid("5F22F8A9-F01F-40D4-9709-79BEE9D9C12E"), meshOffsetz = 0.3700000047683716},--0.9779999852180481
-	['Humvee'] = { partition = Guid("611F48A3-0919-11E0-985D-C512734E48AF"),instance = Guid("D23478FF-8893-465C-9899-BE3EBDA7D8DD"), meshOffsetz = 0.3700000047683716},--0.9779999852180481
-	['GAZ-3937'] = { partition = Guid("B9E8F531-DF6E-4221-BD32-A8D15CB2E8C8"),instance = Guid("D42C2061-7F3A-4068-9D40-A4AD649DAFCB"), meshOffsetz = 0.3700000047683716},--0.9779999852180481
-	['RHINO'] = { partition = Guid("193D1786-EC47-11E1-891F-82DA7A0DD2F4"),instance = Guid("E699ACAF-7BCD-4295-A2CE-ADB5B6AE8953"), meshOffsetz = 0.3700000047683716},--0.9779999852180481
-	['M142'] = { partition = Guid("ECE82307-9454-11E1-9418-9BD47D974A22"),instance = Guid("3D3AF465-6068-497F-A3C6-45FAA8032428"), meshOffsetz = 0.4000000059604645 },-- 1.0579999685287476
-	['BM-23'] = { partition = Guid("65CE090F-3CFC-11E1-BDB2-A81058AAD7AA"),instance = Guid("AEC2F1C1-FD1B-4732-93FE-99D31B32936B"), meshOffsetz = 0.4000000059604645},-- 1.0579999685287476
-	['Humvee-ASRAD'] = {partition = Guid('F7C250D2-ECEB-481F-A130-D91FE8B693E0'), instance = Guid('CCC67712-B0D7-419E-B3E4-0D179EC33A88'), meshOffsetz = 0.3700000047683716}, --0.9779999852180481
+    ['M1A2'] = { partition = Guid('B069BA89-EECF-11DD-8117-9421284A74E5'), instance = Guid('B06A096D-EECF-11DD-8117-9421284A74E5'), meshOffsetz = 0.3700000047683716 },--0.9779999852180481
+    ['T90'] = { partition = Guid('60106974-DD7D-11DD-A030-B04E425BA11E'), instance = Guid('6BA00DB1-C4E1-4598-AD56-84CFBDC55FE6'), meshOffsetz = 0.3700000047683716 },--0.9779999852180481
+    ['LAV-25'] = { partition = Guid('D124CDD4-FE2A-11DF-BB74-FD1A26B74EE5'), instance = Guid('A99CF3B4-F605-421C-9371-E9DD925BD862'), meshOffsetz = 0.3700000047683716 },--0.9779999852180481
+    ['LAV-25 XP5'] = { partition = Guid('B791D5BE-5010-49EF-895D-677F5DCE16CB'), instance = Guid('1F77DA90-7FE4-4D9F-9ED1-FEBFEBB53452'), meshOffsetz = 0.3700000047683716 },--0.9779999852180481
+    ['BMP-2M'] = { partition = Guid('AAE95906-AFD4-11DD-84FB-9FA71F68ED5E'), instance = Guid('42A07684-EA97-4B74-B45E-579346B1C404'), meshOffsetz = 0.3700000047683716 },--0.9779999852180481
+    ['BMP-2M XP5'] = { partition = Guid('DD6BCB51-A4FA-4743-910E-E7B953834089'), instance = Guid('1493B7B8-1EF6-49ED-930C-18398794A54C'), meshOffsetz = 0.3700000047683716 },--0.9779999852180481
+    ['BTR-90'] = { partition = Guid('22CFC313-4DD1-49E6-B45F-A8B1194105C5'), instance = Guid('9BC3FD4A-EA7F-4661-B5B5-15933654E675'), meshOffsetz = 0.3700000047683716 },--0.9779999852180481
+    ['AAV-7V1'] = { partition = Guid('F0530CEB-5F63-11E0-858A-FC3FD696384C'), instance = Guid('5F22F8A9-F01F-40D4-9709-79BEE9D9C12E'), meshOffsetz = 0.3700000047683716 },--0.9779999852180481
+    ['Humvee'] = { partition = Guid('611F48A3-0919-11E0-985D-C512734E48AF'), instance = Guid('D23478FF-8893-465C-9899-BE3EBDA7D8DD'), meshOffsetz = 0.3700000047683716 },--0.9779999852180481
+    ['GAZ-3937'] = { partition = Guid('B9E8F531-DF6E-4221-BD32-A8D15CB2E8C8'), instance = Guid('D42C2061-7F3A-4068-9D40-A4AD649DAFCB'), meshOffsetz = 0.3700000047683716 },--0.9779999852180481
+    ['M142'] = { partition = Guid('ECE82307-9454-11E1-9418-9BD47D974A22'), instance = Guid('3D3AF465-6068-497F-A3C6-45FAA8032428'), meshOffsetz = 0.4000000059604645 },--1.0579999685287476
+    ['BM-23'] = { partition = Guid('65CE090F-3CFC-11E1-BDB2-A81058AAD7AA'), instance = Guid('AEC2F1C1-FD1B-4732-93FE-99D31B32936B'), meshOffsetz = 0.4000000059604645 },--1.0579999685287476
+    ['RHINO'] = { partition = Guid('193D1786-EC47-11E1-891F-82DA7A0DD2F4'), instance = Guid('E699ACAF-7BCD-4295-A2CE-ADB5B6AE8953'), meshOffsetz = 0.3700000047683716 },--1.0579999685287476
+    ['Humvee-ASRAD'] = {partition = Guid('F7C250D2-ECEB-481F-A130-D91FE8B693E0'), instance = Guid('CCC67712-B0D7-419E-B3E4-0D179EC33A88'), meshOffsetz = 0.3700000047683716}, --0.9779999852180481
     ['VodnikPhoenix'] = {partition = Guid('4DBB5F24-30D5-4CF1-819B-D6E95561D62F'), instance = Guid('D02D64FA-17D1-45A2-A85F-3F3C7F3147F1'), meshOffsetz = 0.3700000047683716}, --0.9779999852180481
 }
-function ModifyNoZoomVehicle(meshOffsetz,instance)
-	local alternateCameraViewData = AlternateCameraViewData(instance)
+
+function ModifyNoZoomVehicle(meshOffsetz, instance)
+    local alternateCameraViewData = AlternateCameraViewData(instance)
     alternateCameraViewData:MakeWritable()
-    alternateCameraViewData.fieldOfView = 50 -- 20 Co-pilot zoomed view
-    alternateCameraViewData.meshOffset.z = meshOffsetz -- 0.9779999852180481 UI size
+    alternateCameraViewData.fieldOfView = 50 --20
+    alternateCameraViewData.meshOffset.z = meshOffsetz
     print('meshOffsetz')
 end
 
@@ -431,13 +428,13 @@ end
 
 
 
---Helicopter and jet fixed view
+--飞机固定视角
 local StaticCameraZoomConfigs = {
-	['AH1Z'] = { partition = Guid("643135EA-6CA7-11DF-B6FA-F715AA601362"),instance = Guid("549AF5DF-BB5F-4B89-9EF7-79FD8B772F78"),},
-	['AH6'] = { partition = Guid("FD8AB747-FF4D-11DD-A7B1-F7C6DEEC9D32"),instance = Guid("15AB2B39-FF4E-11DD-A7B1-F7C6DEEC9D32"),},
-	['MI-28'] = { partition = Guid("89BE53B6-2FF4-11DE-8C23-DAB1D69416DE"),instance = Guid("89BEA215-2FF4-11DE-8C23-DAB1D69416DE"),},
-	['Z11-W'] = { partition = Guid("D78088E5-38B7-11DE-BF1C-984D9AEE762C"),instance = Guid("D780B026-38B7-11DE-BF1C-984D9AEE762C"),},
-    ['F18'] = { partition = Guid('3EABB4EF-4003-11E0-8ACA-C41D37DB421C'),instance = Guid('52DEEDD5-CB0C-4AF3-BC7E-284C8D3C78CB'),},
+	['AH1Z'] = { partition = Guid('643135EA-6CA7-11DF-B6FA-F715AA601362'),instance = Guid('549AF5DF-BB5F-4B89-9EF7-79FD8B772F78'),},
+	['AH6'] = { partition = Guid('FD8AB747-FF4D-11DD-A7B1-F7C6DEEC9D32'),instance = Guid('15AB2B39-FF4E-11DD-A7B1-F7C6DEEC9D32'),},
+	['MI-28'] = { partition = Guid('89BE53B6-2FF4-11DE-8C23-DAB1D69416DE'),instance = Guid('89BEA215-2FF4-11DE-8C23-DAB1D69416DE'),},
+	['Z11-W'] = { partition = Guid('D78088E5-38B7-11DE-BF1C-984D9AEE762C'),instance = Guid('D780B026-38B7-11DE-BF1C-984D9AEE762C'),},
+	['F18'] = { partition = Guid('3EABB4EF-4003-11E0-8ACA-C41D37DB421C'),instance = Guid('52DEEDD5-CB0C-4AF3-BC7E-284C8D3C78CB'),},
     ['F18-Air'] = { partition = Guid('99E0A725-E473-4A6C-8421-087F390AABFB'),instance = Guid('429CE50C-EE84-44A6-BCB4-4FD749D30C9F'),},
 	['SU35'] = { partition = Guid('76806015-4BE2-11E0-B502-9B84AFF94A89'),instance = Guid('D0A5725B-0C0B-4D24-AB2E-A4ECFA47E096'),},
     ['SU35-Air'] = { partition = Guid('D8A0ED02-46B9-4AE1-8262-2C24995AAED0'),instance = Guid('55D8EB48-0205-4BA5-B788-8D60E67E7BC4'),},
@@ -447,7 +444,7 @@ local StaticCameraZoomConfigs = {
 function ModifyStaticCameraZoom(instance)
 	local pilotCameraData = StaticCameraData(instance)
 	pilotCameraData:MakeWritable()
-	-- Remove freelook from alternate view
+	-- Remove freelook from alternate view(以下这段移除鼠标自由拖动视角并且固定视角)
 	pilotCameraData.yawSensitivityZoomed = 0
 	pilotCameraData.pitchSensitivityZoomed = 0
     print('Modified StaticCamera to FLIR')
@@ -458,11 +455,11 @@ for id, config in pairs(StaticCameraZoomConfigs) do
 end
 
 local PilotAlternateViewZoomConfigs = {
-	['AH1Z'] = { partition = Guid("643135EA-6CA7-11DF-B6FA-F715AA601362"),instance = Guid("0EA2D80E-9561-4F2C-8E66-D710C56DA24B"),},
-	['AH6'] = { partition = Guid("FD8AB747-FF4D-11DD-A7B1-F7C6DEEC9D32"),instance = Guid("15AB2B3A-FF4E-11DD-A7B1-F7C6DEEC9D32"),},
-	['MI-28'] = { partition = Guid("89BE53B6-2FF4-11DE-8C23-DAB1D69416DE"),instance = Guid("89BEA243-2FF4-11DE-8C23-DAB1D69416DE"),},
-	['Z11-W'] = { partition = Guid("D78088E5-38B7-11DE-BF1C-984D9AEE762C"),instance = Guid("D780B027-38B7-11DE-BF1C-984D9AEE762C"),},
-    ['F18'] = { partition = Guid('3EABB4EF-4003-11E0-8ACA-C41D37DB421C'),instance = Guid('86D8EACB-8637-4BFB-AD0D-9A905DDF812A'),},
+	['AH1Z'] = { partition = Guid('643135EA-6CA7-11DF-B6FA-F715AA601362'),instance = Guid('0EA2D80E-9561-4F2C-8E66-D710C56DA24B'),},
+	['AH6'] = { partition = Guid('FD8AB747-FF4D-11DD-A7B1-F7C6DEEC9D32'),instance = Guid('15AB2B3A-FF4E-11DD-A7B1-F7C6DEEC9D32'),},
+	['MI-28'] = { partition = Guid('89BE53B6-2FF4-11DE-8C23-DAB1D69416DE'),instance = Guid('89BEA243-2FF4-11DE-8C23-DAB1D69416DE'),},
+	['Z11-W'] = { partition = Guid('D78088E5-38B7-11DE-BF1C-984D9AEE762C'),instance = Guid('D780B027-38B7-11DE-BF1C-984D9AEE762C'),},
+	['F18'] = { partition = Guid('3EABB4EF-4003-11E0-8ACA-C41D37DB421C'),instance = Guid('86D8EACB-8637-4BFB-AD0D-9A905DDF812A'),},
     ['F18-Air'] = { partition = Guid('99E0A725-E473-4A6C-8421-087F390AABFB'),instance = Guid('536B72DD-58EB-474D-B973-B183B2FFC34B'),},
 	['SU35'] = { partition = Guid('76806015-4BE2-11E0-B502-9B84AFF94A89'),instance = Guid('1B7C8CCB-1536-42ED-A469-47239C04CA6E'),},
     ['SU35-Air'] = { partition = Guid('D8A0ED02-46B9-4AE1-8262-2C24995AAED0'),instance = Guid('C573B049-1A5F-4422-8C39-11C08DE6FEC3'),},
@@ -472,9 +469,9 @@ local PilotAlternateViewZoomConfigs = {
 function ModifyPilotAlternateViewZoom(instance)
 	local pilotAlternateView = AlternateCameraViewData(instance)
 	pilotAlternateView:MakeWritable()
-    -- Enable toggle behaviour between views
+    -- Enable toggle behaviour between views(将驾驶员的热成像开启键绑定鼠标右键)
 	pilotAlternateView.toggleViewChange = true
-    --Remove input restriction from alternate view
+    --Remove input restriction from alternate view(取消热成像视角时的输出限制)
 	pilotAlternateView.inputSuppression.suppressVehicleInput:clear()
     print('Modified PilotAlternateView to FLIR')
 end
@@ -483,8 +480,7 @@ for id, config in pairs(PilotAlternateViewZoomConfigs) do
 	ResourceManager:RegisterInstanceLoadHandler(config.partition, config.instance, ModifyPilotAlternateViewZoom)
 end
 
-
---Jet and XP5 AA Thermal
+--Jet和 XP5 AA的热成像
 local JetFlirGuids = {
     ['F18'] = {
         partition = Guid('3EABB4EF-4003-11E0-8ACA-C41D37DB421C'),
@@ -568,37 +564,13 @@ function ModifyJetFLIR(guids, id)
     print('Added FLIR to ' .. id)
 end
 
-
+--如果你想玩XP5的jet，请开启此选项
 --[[Events:Subscribe('Level:LoadResources', function()
 	ResourceManager:MountSuperBundle('xp3chunks')
 	ResourceManager:MountSuperBundle('levels/xp3_alborz/xp3_alborz')
 end)]]
 
 --[[Hooks:Install('ResourceManager:LoadBundles', 100, function(hook, bundles, compartment)
-    if #bundles == 1 and bundles[1] == SharedUtils:GetLevelName() then
-        print('Injecting bundles.')
-
-        bundles = {
-        'levels/xp3_alborz/xp3_alborz',
-        'levels/xp3_alborz/rushlarge0',
-		bundles[1],
-        }
-
-        hook:Pass(bundles, compartment)
-    end
-end)
-Events:Subscribe('Level:RegisterEntityResources', function(levelData)
-	local Registry = RegistryContainer(ResourceManager:SearchForInstanceByGuid(Guid('6C72B9D2-484E-A4D0-94FA-8A8D39357040'))) 
-    ResourceManager:AddRegistry(Registry, ResourceCompartment.ResourceCompartment_Game)
-end)]]
-
---Open Air Superiority
---[[Events:Subscribe('Level:LoadResources', function()
-	ResourceManager:MountSuperBundle('xp3chunks')
-	ResourceManager:MountSuperBundle('levels/xp3_alborz/xp3_alborz')
-end)
-
-Hooks:Install('ResourceManager:LoadBundles', 100, function(hook, bundles, compartment)
     if #bundles == 1 and bundles[1] == SharedUtils:GetLevelName() then
         print('Injecting bundles.')
 
